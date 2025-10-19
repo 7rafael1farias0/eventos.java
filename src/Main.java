@@ -16,8 +16,6 @@ public class Main {
     public static void main(String[] args) {
         gerenciador = new GerenciadorEventos();
 
-        // 2. CHAMA O MÉTODO AQUI!
-        // Ele só adicionará os dados se a lista estiver vazia.
         inicializarDadosSeVazio();
 
         System.out.println("--- Bem-vindo ao sistema de eventos da cidade ---");
@@ -25,7 +23,7 @@ public class Main {
         menuPrincipal();
     }
 
-    // --- Métodos de Interface (Console) ---
+
 
     private static void cadastrarUsuario() {
         System.out.println("\nPrimeiro, vamos cadastrar você!");
@@ -45,7 +43,7 @@ public class Main {
         System.out.println("senha: ");
         String senha = scanner.nextLine();
 
-        LocalDate dataNascimento = LocalDate.of(1990, 1, 1); // Simplificação, idealmente com input
+        LocalDate dataNascimento = LocalDate.of(1990, 1, 1);
 
         usuarioAtual = new Usuario(nome, CPF, email, telefone, dataNascimento, senha);
         System.out.println("\nUsuário " + usuarioAtual.getNome() + " cadastrado com sucesso!");
@@ -82,7 +80,7 @@ public class Main {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, digite o número da opção.");
-                opcao = -1; // Garante que o loop continue
+                opcao = -1;
             }
         }
     }
@@ -96,9 +94,9 @@ public class Main {
         System.out.print("Endereço: ");
         String endereco = scanner.nextLine();
 
-        Categoria categoria = lerCategoria(); // Método auxiliar para ler Categoria
+        Categoria categoria = lerCategoria();
 
-        LocalDateTime horario = lerHorario(); // Método auxiliar para ler Horário
+        LocalDateTime horario = lerHorario();
 
         System.out.print("Descrição: ");
         String descricao = scanner.nextLine();
@@ -225,7 +223,7 @@ public class Main {
             int id = Integer.parseInt(scanner.nextLine());
             Evento eventoParaCancelar = gerenciador.buscarEventoPorHashCode(id);
 
-            // É importante buscar na lista principal e depois cancelar na lista do usuário
+
             if (eventoParaCancelar != null) {
                 usuarioAtual.cancelarPresenca(eventoParaCancelar);
             } else {
@@ -238,11 +236,10 @@ public class Main {
 
 
     private static void inicializarDadosSeVazio() {
-        // Definimos uma data base de referência para 2025 para que os eventos funcionem
-        // conforme o cenário que estamos trabalhando.
+
         int anoBase = 2025;
 
-        // Se o gerenciador não carregou nada do arquivo (lista vazia)
+
         if (gerenciador.consultarTodos().isEmpty()) {
             System.out.println("\n--- Inicializando o sistema com a lista de eventos de Porto Alegre... ---");
 
@@ -265,15 +262,13 @@ public class Main {
             gerenciador.cadastrarEvento(new Evento("HARRY ROCKET - CLÁSSICOS DO ROCK", "NOSSO TAP ROOM - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 10, 25, 18, 0), "Clássicos do Rock"));
             gerenciador.cadastrarEvento(new Evento("Festa Goodbye Lenin", "Bar Ocidente - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 10, 10, 23, 0), "Festa no Ocidente"));
             gerenciador.cadastrarEvento(new Evento("GUSTAVO LINS E RDS DO DECK", "Av. Baltazar de Oliveira Garcia, 3868 - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 10, 10, 20, 0), "Show de Pagode e Samba"));
-            // GARDEN MUSIC FESTIVAL é um evento de 2 dias, vou usar o início
             gerenciador.cadastrarEvento(new Evento("GARDEN MUSIC FESTIVAL 2026", "Local a definir - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(2026, 3, 14, 18, 0), "Festival musical de dois dias"));
             gerenciador.cadastrarEvento(new Evento("Baile Funk + preços especiais", "Nuvem - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 11, 22, 23, 0), "Baile Funk"));
             gerenciador.cadastrarEvento(new Evento("OPEN Combinhos", "Nuvem - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 11, 21, 23, 0), "Festa Open Bar"));
             gerenciador.cadastrarEvento(new Evento("Noche de Los Mueros / OPEN Destilados", "Nuvem - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 11, 1, 23, 0), "Festa de Halloween/Dia dos Mortos"));
             gerenciador.cadastrarEvento(new Evento("Sunset da R&A", "Casa das Flores - Porto Alegre, RS", Categoria.FESTASESHOWS, LocalDateTime.of(anoBase, 10, 25, 14, 0), "Sunset Party"));
 
-            // --- CATEGORIA CULTURAL ---
-            // (Vou usar o formato simplificado: Nome, Endereço, Categoria, data/hora, Descrição)
+            // --- CATEGORIA CULTURAL --
             gerenciador.cadastrarEvento(new Evento("Sessão e Oficina - 31/10", "Planetário da UFRGS", Categoria.CULTURAL, LocalDateTime.of(anoBase, 10, 31, 14, 0), "Sessão no Planetário"));
             gerenciador.cadastrarEvento(new Evento("Sessão e Oficina - 15/10", "Planetário da UFRGS", Categoria.CULTURAL, LocalDateTime.of(anoBase, 10, 15, 14, 0), "Sessão no Planetário"));
             gerenciador.cadastrarEvento(new Evento("Paint & sparkles", "Poa Café Armazém", Categoria.CULTURAL, LocalDateTime.of(anoBase, 10, 10, 16, 0), "Pintura em taças de espumante"));
@@ -283,23 +278,23 @@ public class Main {
             gerenciador.cadastrarEvento(new Evento("Caminhada Cultural Cemitérios", "Cemitério da Santa Casa", Categoria.CULTURAL, LocalDateTime.of(anoBase, 10, 10, 10, 0), "Caminhada em Cemitérios históricos"));
             gerenciador.cadastrarEvento(new Evento("A NOVIÇA MAIS REBELDE", "Salão de Atos PUC RS", Categoria.CULTURAL, LocalDateTime.of(anoBase, 11, 9, 20, 0), "Espetáculo de comédia"));
             gerenciador.cadastrarEvento(new Evento("Confessionário - Relatos de Casa", "Teatro da PUC RS", Categoria.CULTURAL, LocalDateTime.of(anoBase, 11, 1, 20, 0), "Peça de teatro"));
-            // ... (Adicionar os demais eventos culturais seguindo o padrão)
+
 
             // --- CATEGORIA ESPORTIVO ---
             gerenciador.cadastrarEvento(new Evento("II Encontro Gaúcho de Gestores", "Sede Famurs - Porto Alegre, RS", Categoria.ESPORTIVO, LocalDateTime.of(anoBase, 10, 16, 9, 0), "Encontro de Gestores Esportivos"));
             gerenciador.cadastrarEvento(new Evento("CORRIDA E CAMINHADA SEST SENAT", "Rótula das Cuias - Porto Alegre, RS", Categoria.ESPORTIVO, LocalDateTime.of(anoBase, 10, 12, 8, 0), "Corrida e Caminhada"));
             gerenciador.cadastrarEvento(new Evento("27ª Corrida para Vencer o Diabetes", "Parque Moinhos de Vento", Categoria.ESPORTIVO, LocalDateTime.of(anoBase, 10, 26, 9, 0), "Corrida Beneficente"));
-            // O 4° Treinão é longo, usarei a data de início para o cadastro
+
             gerenciador.cadastrarEvento(new Evento("4° Treinão de GRAU / POA-RS", "Complexo Cultural do Porto Seco", Categoria.ESPORTIVO, LocalDateTime.of(anoBase, 10, 1, 10, 0), "Treinão que dura até 19/10"));
             gerenciador.cadastrarEvento(new Evento("Treinão MovKids", "Sítio 902 - Esporte e Lazer", Categoria.ESPORTIVO, LocalDateTime.of(anoBase, 10, 12, 14, 0), "Treinão para crianças"));
-            // ... (Adicionar os demais eventos esportivos seguindo o padrão)
+
 
             // --- CATEGORIA GASTRONOMICO ---
             gerenciador.cadastrarEvento(new Evento("Experiência Sensorial Gastronômica", "Casa 408", Categoria.GASTRONOMICO, LocalDateTime.of(anoBase, 10, 18, 19, 0), "Degustação e experiência"));
             gerenciador.cadastrarEvento(new Evento("Fermentados: Kombucha, Kefir e Chucrute", "Casa 408", Categoria.GASTRONOMICO, LocalDateTime.of(anoBase, 10, 11, 10, 0), "Workshop de fermentação"));
             gerenciador.cadastrarEvento(new Evento("Domingo de Fogo de Chão", "Rancho Tabacaray", Categoria.GASTRONOMICO, LocalDateTime.of(anoBase, 11, 30, 12, 0), "Almoço com churrasco"));
             gerenciador.cadastrarEvento(new Evento("1° Festival Africano - Banquete", "Unisinos Porto Alegre", Categoria.GASTRONOMICO, LocalDateTime.of(anoBase, 10, 10, 12, 0), "Banquete de culinária africana"));
-            // ... (Adicionar os demais eventos gastronômicos seguindo o padrão)
+
 
             // Garante que o arquivo events.data seja criado com os novos dados
             gerenciador.salvarEventos();

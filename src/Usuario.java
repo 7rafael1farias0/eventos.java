@@ -7,12 +7,12 @@ public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String nome;        // Atributo 1
-    private String CPF;         // Atributo 2
-    private String email;       // Atributo 3
-    private String telefone;    // Atributo 4
-    private LocalDate dataNascimento; // Atributo 5
-    private String senha;      // Atributo extra
+    private String nome;
+    private String CPF;
+    private String email;
+    private String telefone;
+    private LocalDate dataNascimento;
+    private String senha;
 
     private List<Evento> eventosConfirmados;
 
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
         this.eventosConfirmados = new ArrayList<>();
     }
 
-    // --- Getters (Mínimos para o console) ---
+
     public String getNome() { return nome; }
     public List<Evento> getEventosConfirmados() { return eventosConfirmados; }
 

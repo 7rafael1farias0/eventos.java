@@ -15,12 +15,12 @@ public class GerenciadorEventos {
 
     // --- Persistência de Dados (Serialização) ---
 
-    @SuppressWarnings("unchecked") // Para suprimir o warning da conversão
+    @SuppressWarnings("unchecked")
     public void carregarEventos() {
         File arquivo = new File(NOME_ARQUIVO);
         if (arquivo.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
-                // Lê o objeto (a lista) do arquivo
+
                 eventosCadastrados = (List<Evento>) ois.readObject();
                 System.out.println("\nEventos carregados com sucesso do arquivo " + NOME_ARQUIVO + ".");
             } catch (IOException | ClassNotFoundException e) {
@@ -35,7 +35,7 @@ public class GerenciadorEventos {
 
     public void salvarEventos() {
         try (ObjectOutputStream oos = new  ObjectOutputStream(new FileOutputStream(NOME_ARQUIVO))) {
-            // Escreve o objeto (a lista) no arquivo
+
             oos.writeObject(eventosCadastrados);
             System.out.println("Dados salvos com sucesso em " + NOME_ARQUIVO + ".");
         } catch (IOException e) {
@@ -77,7 +77,7 @@ public class GerenciadorEventos {
     public List<Evento> consultarOcorridos() {
         return eventosCadastrados.stream()
                 .filter(Evento::jaOcorreu)
-                .sorted(Comparator.comparing(Evento::getHorario).reversed()) // Mais recente primeiro
+                .sorted(Comparator.comparing(Evento::getHorario).reversed())
                 .collect(Collectors.toList());
     }
 
